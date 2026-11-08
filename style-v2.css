@@ -1,0 +1,143 @@
+/* Salon de BON 刷新版 style-v2 (2026-11-08)
+   コンセプト: 料金掲示型。白地＋墨＋深い臙脂。メニューを価格表として最優先に置く。
+   フォント: Noto Sans JP 500/700/900 のみ。角丸0。 */
+:root{
+  --paper:#FFFFFF; --band:#F3EBDD; --ink:#191919; --main:#6E1E28; --main-dark:#4E141D;
+  --line:#191919; --soft:#D8CDB8; --container:1080px; --gutter:16px; --sy:64px;
+}
+@media(min-width:768px){:root{--gutter:24px;--sy:96px}}
+*,*::before,*::after{box-sizing:border-box;border-radius:0}
+html{scroll-padding-top:16px;-webkit-text-size-adjust:100%}
+body{margin:0;padding-bottom:64px;background:var(--paper);color:var(--ink);font-family:"Noto Sans JP",sans-serif;font-weight:500;font-size:16px;line-height:1.8;font-variant-numeric:tabular-nums}
+@media(min-width:768px){body{padding-bottom:0;font-size:17px}}
+h1,h2,h3,h4{font-weight:700;line-height:1.5;margin:0}
+p{margin:0 0 16px} ul,ol{margin:0;padding:0;list-style:none}
+img{display:block;max-width:100%;height:auto} figure{margin:0}
+button{font:inherit;color:inherit}
+table{border-collapse:collapse;width:100%} th{font-weight:700;text-align:left}
+.num{font-weight:900;font-variant-numeric:tabular-nums}
+a{color:var(--ink);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:2px}
+:focus-visible{outline:3px solid var(--main);outline-offset:3px}
+.container{width:100%;max-width:var(--container);margin-inline:auto;padding-inline:var(--gutter)}
+.visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.small{font-size:14px;line-height:1.7}
+.demo-banner{background:var(--ink);color:#fff;font-weight:700;font-size:14px;padding-block:8px;text-align:center}
+/* ヘッダー: 文字だけの細い帯 */
+.site-header{border-bottom:4px solid var(--ink)}
+.header-inner{display:flex;flex-wrap:wrap;align-items:center;gap:8px 24px;padding-block:12px}
+.logo{font-weight:900;font-size:22px;text-decoration:none;line-height:1.3}
+.logo-sub{font-weight:700;font-size:13px;margin-right:8px}
+.header-tel{margin-left:auto;font-weight:900;font-size:20px;text-decoration:none;white-space:nowrap}
+.gnav{width:100%;border-top:1px solid var(--soft)}
+.gnav ul{display:flex;flex-wrap:wrap}
+.gnav a{display:flex;align-items:center;min-height:44px;padding-inline:12px;font-weight:700;font-size:14px;text-decoration:none}
+@media(min-width:768px){.logo{font-size:26px}.header-tel{font-size:26px}}
+.btn{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;padding:8px 28px;background:var(--main);color:#fff;font-weight:700;text-decoration:none;line-height:1.4;text-align:center}
+.btn:hover{background:var(--main-dark)}
+.btn-small{font-size:14px}.btn-tel{font-size:28px;line-height:1.3}
+.btn-line{background:#fff;color:var(--ink);border:2px solid var(--ink)}
+.btn-line:hover{background:var(--band);color:var(--ink)}
+/* ヒーロー: 左右分割(左=文字の固まり/右=写真)。写真に文字を重ねない */
+.hero{display:grid}
+.hero-text{padding:40px var(--gutter) 48px;max-width:var(--container);margin-inline:auto;width:100%}
+.hero-name{font-weight:900;font-size:34px;line-height:1.25}
+.hero-kana{font-weight:700;font-size:15px}
+.hero-catch{font-weight:900;font-size:24px;line-height:1.5;margin-top:24px;color:var(--main)}
+.hero-facts{margin-top:24px;border-top:2px solid var(--ink)}
+.hero-facts li{display:flex;justify-content:space-between;gap:16px;padding:10px 0;border-bottom:1px solid var(--soft);font-weight:700}
+.hero-facts li span:last-child{font-weight:900;text-align:right}
+.hero-cta{margin-top:24px;display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+.hero-photo img{width:100%;height:100%;object-fit:cover;min-height:280px}
+@media(min-width:900px){
+  .hero{grid-template-columns:1fr 1fr;border-bottom:2px solid var(--ink)}
+  .hero-text{padding:64px 48px 64px max(24px,calc((100vw - var(--container))/2));margin:0;max-width:none}
+  .hero-name{font-size:44px}.hero-catch{font-size:30px}
+}
+/* 見出し: 番号＋太い下罫(縦バーは使わない) */
+.heading{display:flex;align-items:baseline;gap:16px;font-size:24px;padding-bottom:12px;border-bottom:4px solid var(--ink);margin-bottom:32px}
+.heading .no{font-weight:900;font-size:32px;color:var(--main)}
+@media(min-width:768px){.heading{font-size:30px}.heading .no{font-size:40px}}
+.section{padding-block:var(--sy)}
+.section-band{background:var(--band)}
+/* 料金表: 行＋点線リーダー＋右揃え価格 */
+.price-table{border-top:2px solid var(--ink)}
+.price-table th,.price-table td{padding:16px 0;border-bottom:1px solid var(--soft);vertical-align:baseline}
+.price-table th{font-size:18px}
+.price-table .desc{display:block;font-weight:500;font-size:14px;margin-top:4px}
+.price-table td.price{text-align:right;font-weight:900;font-size:28px;white-space:nowrap;width:6.5em}
+.price-table td.price .suffix{font-size:18px;font-weight:700}
+.first-price{display:inline-block;background:var(--main);color:#fff;font-weight:700;font-size:13px;padding:2px 8px;margin-left:8px;vertical-align:middle}
+.notice{margin-top:32px;border:2px solid var(--ink);padding:24px;background:#fff}
+.notice h3{font-size:18px;margin-bottom:12px}
+.notice-cols{display:grid;gap:24px}
+@media(min-width:768px){.notice-cols{grid-template-columns:1fr 1fr;gap:48px}}
+.mini-table{border-top:2px solid var(--ink)}
+.mini-table th,.mini-table td{padding:8px 0;border-bottom:1px solid var(--soft)}
+.mini-table td{text-align:right;font-weight:900;font-size:20px;white-space:nowrap}
+/* ヘッドスパ大写真ストリップ */
+.strip{display:grid;gap:0;margin-top:48px}
+.strip img{width:100%;aspect-ratio:16/7;object-fit:cover}
+.strip figcaption{font-weight:700;padding-top:8px}
+@media(min-width:768px){.strip{grid-template-columns:2fr 1fr;gap:24px}.strip img{aspect-ratio:auto;height:100%}}
+.strip-side{background:var(--main);color:#fff;padding:24px;display:flex;flex-direction:column;justify-content:center}
+.strip-side .big{font-weight:900;font-size:36px;line-height:1.3}
+.strip-side p{margin:0}
+/* お悩み: 番号付き縦リスト */
+.worries{border-top:2px solid var(--ink);counter-reset:w}
+.worries li{counter-increment:w;display:flex;gap:16px;align-items:baseline;padding:14px 0;border-bottom:1px solid var(--soft);font-weight:700;font-size:18px}
+.worries li::before{content:counter(w,decimal-leading-zero);font-weight:900;color:var(--main);font-size:20px}
+/* 当店について: 写真をベージュ面にずらして重ねる */
+.about-wrap{position:relative}
+.about-photo{width:82%}
+.about-photo img{width:100%;aspect-ratio:4/3;object-fit:cover;border:2px solid var(--ink)}
+.about-box{background:var(--band);border:2px solid var(--ink);padding:24px;margin-top:-32px;margin-left:auto;width:88%;position:relative}
+.about-box h3{font-size:19px;margin-bottom:8px}
+.about-box li{padding:14px 0;border-bottom:1px solid var(--soft)}
+.about-box li:last-child{border-bottom:0}
+.about-box p{margin:0}
+@media(min-width:900px){
+  .about-photo{width:55%}
+  .about-box{width:52%;margin-top:-160px;padding:32px}
+}
+/* 来店案内(時間+アクセス統合) */
+.info-grid{display:grid;gap:32px}
+@media(min-width:900px){.info-grid{grid-template-columns:1fr 1fr;gap:48px}}
+.data-table{border-top:2px solid var(--ink)}
+.data-table th,.data-table td{padding:14px 8px 14px 0;border-bottom:1px solid var(--soft);vertical-align:top}
+.data-table th{width:6.5em;white-space:nowrap}
+.hours-table td{font-weight:900;font-size:19px}
+.hours-table .closed td,.hours-table .closed th{color:var(--main);font-weight:900}
+.map{border:2px solid var(--ink);margin-top:24px}
+.map iframe{display:block;width:100%;height:320px;border:0}
+.entrance{margin-top:24px}
+.entrance img{width:100%;aspect-ratio:16/9;object-fit:cover;border:1px solid var(--ink)}
+.entrance figcaption{font-size:14px;padding-top:8px;font-weight:700}
+/* FAQ */
+.faq{border-top:2px solid var(--ink)}
+.faq-item{border-bottom:1px solid var(--ink)}
+.faq-item h3{font-size:inherit}
+.faq-q{display:flex;width:100%;align-items:center;justify-content:space-between;gap:16px;min-height:56px;padding:16px 0;background:transparent;border:0;text-align:left;font-weight:700;font-size:17px;cursor:pointer}
+.faq-q::after{content:"＋";font-weight:900;font-size:22px;color:var(--main)}
+.faq-q[aria-expanded="true"]::after{content:"－"}
+.faq-a{padding:0 0 16px}.faq-a p{margin:0}
+.js .faq-item:has(.faq-q[aria-expanded="false"]) .faq-a{display:none}
+/* 予約: 臙脂の全面帯 */
+.reserve{background:var(--main);color:#fff;padding-block:var(--sy)}
+.reserve .heading{border-color:#fff;color:#fff}
+.reserve .heading .no{color:#fff}
+.reserve-tel a{color:#fff;font-weight:900;font-size:40px;text-decoration:none;line-height:1.2}
+@media(min-width:768px){.reserve-tel a{font-size:68px}}
+.reserve .btn{background:#fff;color:var(--main)}
+.reserve .btn:hover{background:var(--band)}
+.sample-note{padding-block:32px;border-top:2px solid var(--ink)}
+.sample-note h2{font-size:16px;margin-bottom:8px}
+.sample-note p{max-width:800px;margin-bottom:8px}
+.site-footer{background:var(--band);border-top:4px solid var(--ink);padding-block:32px 24px}
+.footer-grid{display:grid;gap:24px}
+@media(min-width:768px){.footer-grid{grid-template-columns:1fr 1fr 1fr}}
+.footer-name{font-weight:900;font-size:22px}
+.site-footer p{margin-bottom:8px;font-size:15px}
+.fixed-cta{position:fixed;left:0;right:0;bottom:0;z-index:50;background:var(--main)}
+.fixed-cta a{display:flex;align-items:center;justify-content:center;gap:16px;min-height:64px;color:#fff;text-decoration:none;font-weight:700}
+.fixed-cta .num{font-size:26px}
+@media(min-width:768px){.fixed-cta{display:none}}
